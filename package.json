@@ -1,0 +1,20 @@
+{
+  "name": "intcv",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "build": "browserify app/app.js -o bundle.js",
+    "watch": "watchify app/app.js -o bundle.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "albarralnunez",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^14.1.0",
+    "watchify": "^3.9.0"
+  },
+  "dependencies": {
+    "three": "^0.84.0"
+  }
+}
