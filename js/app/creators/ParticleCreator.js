@@ -23,8 +23,6 @@ export class ParticleCreator {
         let particle = new Particle( mesh, this.start );
 
         mesh.position.set( this.start.x, this.start.y, this.start.z );
-        console.log(particle);
-        console.log(mesh);
         this.group.add( mesh );
 
         return particle;

@@ -51,7 +51,7 @@ function init () {
     controls.enableZoom = false;
 
 
-    let myName = new TextObjectCreator( scene ).create();
+    myName = new TextObjectCreator( scene ).create();
 
 }
 
