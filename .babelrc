@@ -1,0 +1,4 @@
+// Not useful now, anyway 
+{
+  "presets": ["es2015"]
+}

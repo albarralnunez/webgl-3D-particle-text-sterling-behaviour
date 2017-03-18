@@ -4,17 +4,25 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "build": "browserify app/app.js -o bundle.js",
-    "watch": "watchify app/app.js -o bundle.js",
+    "build": "browserify -t babelify --presets [ es2015 ] -t uglifyify --debug ./js/app/app.js -o ./js/bundle.min.js",
+    "watch": "watchify -t babelify --preesets [ es2015 ] -t uglifyify --debug ./js/app/app.js -o ./js/bundle.min.js",
+    "clean": "rm -rf dist && rm -f bundle.min.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "albarralnunez",
   "license": "ISC",
   "devDependencies": {
+    "babel-preset-es2015": "^6.22.0",
+    "babelify": "^7.3.0",
     "browserify": "^14.1.0",
+    "gulp": "^3.9.1",
+    "jshint": "^2.9.4",
+    "uglifyify": "^3.0.4",
+    "uglifyjs": "^2.4.10",
     "watchify": "^3.9.0"
   },
   "dependencies": {
+    "lodash": "^4.17.4",
     "three": "^0.84.0"
   }
 }
