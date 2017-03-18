@@ -8,12 +8,9 @@ export class Particle {
     constructor ( mesh, position ) {
         this.mesh = mesh;
         this.position = position;
-    }
+        this.velocity = undefined;
+        this.acceleration = undefined;
 
-    set_position( position ) {
-        this.mesh.x = position.x;
-        this.mesh.y = position.y;
-        this.mesh.z = position.z;
     }
 
 }

@@ -6,7 +6,7 @@
 import * as THREE from "three";
 
 
-export var GeometryUtils = {
+THREE.GeometryUtils = {
 
     // Merge two geometries or geometry and geometry from object (using object's transform)
 
@@ -83,7 +83,7 @@ export var GeometryUtils = {
         vB = geometry.vertices[ face.b ];
         vC = geometry.vertices[ face.c ];
 
-        return GeometryUtils.randomPointInTriangle( vA, vB, vC );
+        return THREE.GeometryUtils.randomPointInTriangle( vA, vB, vC );
 
     },
 
@@ -113,7 +113,7 @@ export var GeometryUtils = {
             vB = vertices[ face.b ];
             vC = vertices[ face.c ];
 
-            face._area = GeometryUtils.triangleArea( vA, vB, vC );
+            face._area = THREE.GeometryUtils.triangleArea( vA, vB, vC );
 
             totalArea += face._area;
 
@@ -169,7 +169,7 @@ export var GeometryUtils = {
 
             index = binarySearchIndices( r );
 
-            result[ i ] = GeometryUtils.randomPointInFace( faces[ index ], geometry );
+            result[ i ] = THREE.GeometryUtils.randomPointInFace( faces[ index ], geometry );
 
             if ( ! stats[ index ] ) {
 

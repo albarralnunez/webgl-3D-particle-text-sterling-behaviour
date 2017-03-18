@@ -5,19 +5,17 @@
 
 import * as THREE from "three";
 import Stats from "../libs/stats.min";
+import { TextObjectCreator } from './creators/TextObjectCreator'
 
+// export * from "./three_ext/controls/OrbitControls";
+import './three_ext/controls/OrbitControls'
 
-import { SceneCreator } from './objects/scene_creator'
-import { WindowCreator } from './objects/window_creator';
-import { Box1Creator } from './objects/box_1/box_1_creator'
-import { LanternCreator } from './objects/lantern/lantern_creator'
-import { TextObjectCreator } from './objects/text_object/text_object_creator'
-import { FlorCreator } from './objects/flor/flor_creator'
-
-
-
-let canvas;
+let controls;
 let stats;
+let camera;
+let scene;
+let renderer;
+let myName;
 
 init();
 animate();
@@ -30,29 +28,37 @@ function init () {
     container.appendChild( stats.dom );
 
     // Create scene and set camera
-    let scene = new SceneCreator().create();
+    scene  = new THREE.Scene();
+    scene.fog = new THREE.Fog( 0x000000, 250, 1400 );
 
-    let camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+    // Renderer
+    renderer = new THREE.WebGLRenderer( { antialias: true } );
+    renderer.setClearColor( scene.fog.color );
+    renderer.setPixelRatio( window.devicePixelRatio );
+    renderer.setSize( window.innerWidth, window.innerHeight );
+    container.appendChild( renderer.domElement );
 
-    // Create canvas
-    canvas = new WindowCreator( scene, camera, container ).create();
-
+    //Camera
+    camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
     // Init camera position
-    camera.position.set( 0, 0, 400 );
-    // let cameraTarget = new THREE.Vector3( 0, -313.46, 0 );
-    // camera.lookAt( cameraTarget );
+    camera.position.set( 0, 0, 500 );
+
+    controls = new THREE.OrbitControls( camera, renderer.domElement );
+    controls.addEventListener( 'change', render ); // remove when using animation loop
+    // enable animation loop when using damping or autorotation
+    //controls.enableDamping = true;
+    //controls.dampingFactor = 0.25;
+    controls.enableZoom = false;
 
 
-    // Add objects to scene
-    // let lantern = new LanternCreator( scene ).create();
-    // let box = new Box1Creator( scene ).create();
-    let my_name = new TextObjectCreator( scene ).create();
+    let myName = new TextObjectCreator( scene ).create();
 
 }
 
 function animate () {
 
     requestAnimationFrame( animate );
+    controls.update();
 
     render();
 
@@ -61,6 +67,6 @@ function animate () {
 
 function render () {
 
-    canvas.render();
-
+    renderer.render( scene, camera );
+    console.log( myName );
 }

@@ -4,8 +4,8 @@
 
 
 import * as THREE from "three";
-import { GeometryUtils } from '../../engine/utils/geometry_utils'
-import { ParticleCreator } from '../particle/particle_creator'
+import { ParticleCreator } from './ParticleCreator'
+import "../three_ext/utils/GeometryUtils";
 
 
 export class TextObjectCreator {
@@ -26,7 +26,7 @@ export class TextObjectCreator {
         this.fontName = 'helvetiker';
         this.fontWeight = "regular";
         this.position = undefined;
-        this.numParticles = 3000;
+        this.numParticles = 2000;
 
     }
 
@@ -54,7 +54,8 @@ export class TextObjectCreator {
             );
 
         let group = new THREE.Group();
-        let particles_position = GeometryUtils.randomPointsInGeometry(textGeo, this.numParticles);
+        let particles_position = THREE.GeometryUtils.randomPointsInGeometry(
+            textGeo, this.numParticles);
 
         let particles = this._generateParticles( particles_position, group );
 
@@ -72,13 +73,12 @@ export class TextObjectCreator {
 
     _generateParticles ( particles_position, group ) {
         let particles = [];
-        for ( let i = 1; i < particles_position.length; i ++ ) {
+        for ( let i = 0; i < particles_position.length; i ++ ) {
             let position = particles_position[i];
             particles.push(
                 new ParticleCreator( group, position ).create()
             );
         }
-        console.log( particles );
         return particles;
     }
 
@@ -114,6 +114,7 @@ export class TextObjectCreator {
                 console.log( 'Error reason:' );
                 console.log( reason );
             } );
+        console.log('create text method finished');
         return object;
 
     }

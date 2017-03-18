@@ -4,5 +4,4 @@
 node_modules
 .idea/
 npm-debug.log
-bundle.min.js
 dist

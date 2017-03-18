@@ -3,7 +3,7 @@
  */
 
 import * as THREE from "three";
-import { Particle } from "./particle";
+import { Particle } from "../particle/Particle";
 
 
 export class ParticleCreator {
@@ -22,8 +22,9 @@ export class ParticleCreator {
 
         let particle = new Particle( mesh, this.start );
 
-        particle.set_position( this.start );
-
+        mesh.position.set( this.start.x, this.start.y, this.start.z );
+        console.log(particle);
+        console.log(mesh);
         this.group.add( mesh );
 
         return particle;
