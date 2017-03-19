@@ -14,8 +14,8 @@ export class TextObjectCreator {
 
         this.sceneComposer = sceneComposer;
         this.text = "D a n i e l   A l b a r r a l";
-        this.height = 20;
-        this.size = 70;
+        this.height = 10;
+        this.size = 40;
         this.hover = 0;
         this.curveSegments = 4;
         this.bevelThickness = 2;
@@ -26,7 +26,7 @@ export class TextObjectCreator {
         this.fontName = 'helvetiker';
         this.fontWeight = "regular";
         this.position = undefined;
-        this.numParticles = 2000;
+        this.numParticles = 3000;
 
     }
 

@@ -14,7 +14,7 @@ export class ParticleCreator {
     }
 
     create () {
-        let geometry = new THREE.SphereGeometry( 3, 3, 3 );
+        let geometry = new THREE.SphereGeometry( 0.5, 0.5, 0.5 );
 
         let material = new THREE.MeshBasicMaterial( { color: 0x00ff00, side: THREE.BackSide } );
 

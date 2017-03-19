@@ -58,7 +58,10 @@ function init () {
 function animate () {
 
     requestAnimationFrame( animate );
+
     controls.update();
+
+    console.log(myName);
 
     render();
 
@@ -68,5 +71,5 @@ function animate () {
 function render () {
 
     renderer.render( scene, camera );
-    console.log( myName );
+
 }
