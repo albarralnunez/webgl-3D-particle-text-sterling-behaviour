@@ -22,10 +22,18 @@ export class ParticleCreator {
 
         let particle = new Particle( mesh, this.start );
 
-        mesh.position.set( this.start.x, this.start.y, this.start.z );
+        let x = this._getRandomArbitrary( -window.innerWidth/2, window.innerWidth/2 );
+        let y = this._getRandomArbitrary( -window.innerHeight/2, window.innerHeight/2 );
+        let z = this._getRandomArbitrary( -window.innerWidth/2, window.innerWidth/2 );
+        mesh.position.set( x, y, z );
+
         this.group.add( mesh );
 
         return particle;
+    }
+
+    _getRandomArbitrary ( min, max ) {
+        return Math.random() * (max - min) + min;
     }
 
 }

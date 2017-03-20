@@ -105,17 +105,14 @@ export class TextObjectCreator {
             + this.fontName
             + '_' + this.fontWeight
             + '.typeface.json';
-        let object = undefined;
-        this._loadFont( fontPath )
+        return this._loadFont( fontPath )
             .then( font => {
-                object = this._createText( font );
+                return this._createText( font );
             } )
             .catch( reason => {
                 console.log( 'Error reason:' );
                 console.log( reason );
             } );
-        console.log('create text method finished');
-        return object;
 
     }
 }

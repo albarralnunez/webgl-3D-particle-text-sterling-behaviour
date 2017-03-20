@@ -9,33 +9,52 @@ export class Particle {
 
     constructor ( mesh, position ) {
         this.mesh = mesh;
-        this.position = position;
-        this.velocity = new THREE.Vector3( 1, 1, 1 );
-        this.acceleration = new THREE.Vector3( 1, 1, 1 );
-        this.maxspeed = 10;
-        this.maxforce = 1;
+        this.target = position;
+
+        this.velocity = new THREE.Vector3( 0, 0, 0 );
+        this.maxVelocity = 10;
+        this.distanceMaxVelocity = 400;
+
+        this.velocity.clampLength( 0, this.maxVelocity );
+
+        this.acceleration = new THREE.Vector3( 0, 0, 0 );
+        this.maxAcceleration = 1;
+        this.acceleration.clampLength( 0, this.maxAcceleration );
+
     }
 
-    behaviors () {
-        // let arrive = this.arrive(this.target);
-        // let mouse = createVector(mouseX, mouseY);
-        // let flee = this.flee(mouse);
-        //
-        // arrive.mult(1);
-        // flee.mult(5);
-        //
-        // this.applyForce(arrive);
-        // this.applyForce(flee);
+    _behaviors () {
+        let seek = this._seekTarget();
+
+
+        this._applyForce( seek );
     }
 
-    applyForce () {
-        this.acceleration.add(f);
+    _applyForce ( force ) {
+        this.acceleration.add( force );
+    }
+
+    _seekTarget () {
+        let desired = new THREE.Vector3().subVectors( this.target, this.mesh.position );
+        let distance = desired.length();
+        let speed = this.maxVelocity;
+        if (distance <  this.distanceMaxVelocity) {
+            speed = distance * this.maxVelocity /  this.distanceMaxVelocity;
+        }
+        desired.setLength( speed );
+        return new THREE.Vector3().subVectors( desired, this.velocity );
+    }
+
+    _flee( ray ) {
+
     }
 
     update () {
-        this.mesh.position.add(this.vel);
-        this.velocity.add(this.acc);
-        this.acceleration.mult(0);
+        this._behaviors();
+        this.mesh.position.add( this.velocity );
+        this.velocity.add( this.acceleration );
+        this.acceleration = new THREE.Vector3( 0, 0, 0 );
     }
+
 
 }

@@ -22,6 +22,7 @@ animate();
 
 
 function init () {
+
     let container = document.getElementById( 'container' );
 
     stats = Stats();
@@ -60,8 +61,12 @@ function animate () {
     requestAnimationFrame( animate );
 
     controls.update();
+    myName.then( particles =>
+        particles.forEach( particle => {
+            particle.update();
+        } ) );
 
-    console.log(myName);
+    // console.log(myName);
 
     render();
 
